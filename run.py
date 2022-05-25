@@ -125,9 +125,9 @@ for ind in range(1, quantity_questions + 1):
 
 def update_ponderation_worksheet_title(ponderation_title_worksheet):
     """
-    Update ponderation worksheet with title, 
-    if user input 3 question for the exam,
-    this will update the ponderation worksheet title with 3 columns.
+    Update ponderation worksheet with title. 
+    If user input 3 question for the exam this will update the ponderation
+    worksheet title with 3 columns.
     Question 1 % to Question 3 % Starting in B1.
     A1 starts with Student Name.
     """
@@ -137,4 +137,61 @@ def update_ponderation_worksheet_title(ponderation_title_worksheet):
 
 update_ponderation_worksheet_title(ponderation_title_percentage)
 
+number_students = int(data_students_questions[0])
+
+for i in range(1, number_students + 1):
+    
+    def get_students_name():
+        """
+        Function used to ask the user for the different names of the students.
+        Will ask for the exact amount of names as students input from user.
+        """
+    
+        while True:
+            print(f"Please enter the name of the student {i}")
+            print("The name must only contain letters")
+            student_name = input("Enter de name:")
+
+            if validate_name(student_name):
+                print("The name is valid!")
+                break
+        return student_name
+    
+    def validate_name(name_value):
+        """
+        Function that validates the name of the students is only alphabetic.
+        """
+
+        try:
+            if name_value.isalpha():
+                return True
+
+            else:
+                raise ValueError(
+                    "The student name must be conformed by letters"
+                )
+                return False
+        except ValueError as e:
+            print(f"Invalid data: {e}, please try again.\n")
+            return False
+        return True
+
+    def update_student_name(data_student_name):
+        """
+        Function that add the name of the students to grade and
+        ponderation spreedsheets
+        """
+        print("Updating grade and ponderation worksheet...\n")
+        print(data_student_name)
+        gradee_worksheet = SHEET.worksheet("grade")
+        gradee_worksheet.append_row(data_student_name)
+        ponderationn_worksheet = SHEET.worksheet("ponderation")
+        ponderationn_worksheet.append_row(data_student_name)
+        print("Student name updated successfully.\n")  
+
+    student_name = []
+    student_name.append(get_students_name())
+    update_student_name(student_name)
+
+    
 
