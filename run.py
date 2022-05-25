@@ -17,19 +17,41 @@ def get_quantity_students_questions_data():
     Get quantity of students and quantity of questions the exam has.
     input from user.
     """
-    
-    print("Please enter quantity of students and questions from exam")
-    print("Data should be two numbers, separated by commas.")
-    print("Example: 2,3")
+    while True:
 
-    quantity_str = input("Enter your data here: ")
+        print("Please enter quantity of students and questions from exam")
+        print("Data should be two numbers, separated by commas.")
+        print("Example: 2,3")
 
-    quantity_data = quantity_str.split(",")
+        quantity_str = input("Enter your data here: ")
+
+        quantity_data = quantity_str.split(",")
+
+        if validate_data(quantity_data):
+            print("Data is valid!")
+            break
 
     return quantity_data
 
-data = get_quantity_students_questions_data()
+#data_quantity = get_quantity_students_questions_data()
 
-data1 = data[0]
+def validate_data(values):
+    """
+    Inside the try, converts all string values into integers.
+    Raises ValueError if strings cannot be converted into int,
+    or if there aren't exactly 2 values.
+    """
+    try:
+        [int(value) for value in values]
+        if len(values) != 2:
+            raise ValueError(
+                f"Exactly 2 values required, you provided {len(values)}"
+            )
+    except ValueError as e:
+        print(f"Invalid data: {e}, please try again.\n")
+        return False
 
-print(data1)
+    return True
+
+data_students_questions = get_quantity_students_questions_data()
+quantity_data = [int(num) for num in data_students_questions]
