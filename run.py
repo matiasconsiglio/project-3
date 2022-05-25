@@ -61,12 +61,19 @@ def validate_data(values):
     or if there aren't exactly 2 values.
     Code adapted from love-sandwiches example project from CI course.
     """
+    quantity = values
+    quantity_data_int = (int(x) for x in quantity)   
     try:
         [int(value) for value in values]
         if len(values) != 2:
             raise ValueError(
                 f"Exactly 2 values required, you provided {len(values)}"
-            )
+            ) 
+        elif all(x < 1 for x in quantity_data_int):
+            raise ValueError(
+                "Student and questions must be atleast 1"
+            )          
+
     except ValueError as e:
         print(f"Invalid data: {e}, please try again.\n")
         return False
@@ -129,7 +136,5 @@ def update_ponderation_worksheet_title(ponderation_title_worksheet):
 
 
 update_ponderation_worksheet_title(ponderation_title_percentage)
-
-
 
 
