@@ -12,7 +12,8 @@ SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('project_3')
 
-def get_quantity_students_questions_data():
+
+def get_quantity_students_questions_data():  
     """
     Get quantity of students and quantity of questions the exam has.
     input from user.
@@ -37,6 +38,7 @@ def get_quantity_students_questions_data():
 
     return quantity_data
 
+
 def validate_data(values):
     """
     Inside the try, converts all string values into integers.
@@ -56,6 +58,7 @@ def validate_data(values):
 
     return True
 
+
 def update_data_quantity_worksheet(data_students_questions):
     """
     Update quantity worksheet, add new row with the list data provided.
@@ -66,6 +69,52 @@ def update_data_quantity_worksheet(data_students_questions):
     quantity_worksheet.append_row(data_students_questions)
     print("quantity worksheet updated successfully.\n")
 
+
 data_students_questions = get_quantity_students_questions_data()
 quantity_data = [int(num) for num in data_students_questions]
 update_data_quantity_worksheet(quantity_data)
+
+quantity_questions = quantity_data[1]
+
+grade_title_points = []
+
+for ind in range(1, quantity_questions + 1):
+    grade_title_points.append(f'Question {ind} (pts)')
+
+
+def update_grade_worksheet_title(grade_title_worksheet):
+    """
+    Update grade worksheet with title, if user input 3 question for the exam,
+    this will update the grade worksheet title with 3 columns.
+    Question 1 (pts) to Question 3 (pts) Starting in B1.
+    A1 starts with Student Name.
+    """
+    grade_worksheet = SHEET.worksheet("grade")
+    grade_worksheet.append_row(grade_title_worksheet, table_range='B1')
+
+
+update_grade_worksheet_title(grade_title_points)
+
+ponderation_title_percentage = []
+
+for ind in range(1, quantity_questions + 1):
+    ponderation_title_percentage.append(f'Question {ind} %')
+
+
+def update_ponderation_worksheet_title(ponderation_title_worksheet):
+    """
+    Update ponderation worksheet with title, 
+    if user input 3 question for the exam,
+    this will update the ponderation worksheet title with 3 columns.
+    Question 1 % to Question 3 % Starting in B1.
+    A1 starts with Student Name.
+    """
+    pond_worksheet = SHEET.worksheet("ponderation")
+    pond_worksheet.append_row(ponderation_title_worksheet, table_range='B1')
+
+
+update_ponderation_worksheet_title(ponderation_title_percentage)
+
+
+
+
