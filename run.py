@@ -12,6 +12,21 @@ SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('project_3')
 
+print(
+    "This program calculates the final grade of an exam. "
+    "First takes as input the quantity of students and questions of the exam. "
+    "Second takes as input the score per question and the percentage each "
+    "question ponderates from the global grade. "
+    "In this hypotetical program the grading works from 0 to 100 points. "
+    "0 is the minumum score and 100 is the maximum score. "
+    "To pass the student needs to have a score higher or equal to 60 points. "
+    "For example an exam has 2 questions. A random student gets 30 points "
+    "in the first question and 80 points in the second. "
+    "The first question has a weight of 30% of the global grade and "
+    "the second question has a weight of 70% of the global grade. "
+    "The student global grade would be 65 points. Pass.\n "
+)
+
 
 def get_quantity_students_questions_data():  
     """
@@ -79,7 +94,7 @@ quantity_questions = quantity_data[1]
 grade_title_points = []
 
 for ind in range(1, quantity_questions + 1):
-    grade_title_points.append(f'Question {ind} (pts)')
+    grade_title_points.append(f'Question {ind} (xpts)')
 
 
 def update_grade_worksheet_title(grade_title_worksheet):
@@ -98,7 +113,7 @@ update_grade_worksheet_title(grade_title_points)
 ponderation_title_percentage = []
 
 for ind in range(1, quantity_questions + 1):
-    ponderation_title_percentage.append(f'Question {ind} %')
+    ponderation_title_percentage.append(f'Question {ind} (x%)')
 
 
 def update_ponderation_worksheet_title(ponderation_title_worksheet):
