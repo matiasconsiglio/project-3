@@ -16,6 +16,10 @@ def get_quantity_students_questions_data():
     """
     Get quantity of students and quantity of questions the exam has.
     input from user.
+    Run a while loop to collect a valid string of data from the user
+    via the terminal, which must be a string of 2 numbers separated
+    by comma. The loop will repeatedly request data, until it is valid.
+    Code adapted from love-sandwiches example project from CI course.
     """
     while True:
 
@@ -33,13 +37,12 @@ def get_quantity_students_questions_data():
 
     return quantity_data
 
-#data_quantity = get_quantity_students_questions_data()
-
 def validate_data(values):
     """
     Inside the try, converts all string values into integers.
     Raises ValueError if strings cannot be converted into int,
     or if there aren't exactly 2 values.
+    Code adapted from love-sandwiches example project from CI course.
     """
     try:
         [int(value) for value in values]
@@ -53,5 +56,16 @@ def validate_data(values):
 
     return True
 
+def update_data_quantity_worksheet(data_students_questions):
+    """
+    Update quantity worksheet, add new row with the list data provided.
+    Code adapted from love-sandwiches example project from CI course.
+    """
+    print("Updating Quantity worksheet...\n")
+    quantity_worksheet = SHEET.worksheet("quantity")
+    quantity_worksheet.append_row(data_students_questions)
+    print("quantity worksheet updated successfully.\n")
+
 data_students_questions = get_quantity_students_questions_data()
 quantity_data = [int(num) for num in data_students_questions]
+update_data_quantity_worksheet(quantity_data)
