@@ -40,7 +40,7 @@ def get_quantity_students_questions_data():
     while True:
 
         print("Please enter quantity of students and questions from exam")
-        print("Data should be two numbers, separated by commas.")
+        print("Data should be two integer numbers, separated by commas.")
         print("Example: 2,3")
 
         quantity_str = input("Enter your data here: ")
@@ -69,7 +69,7 @@ def validate_data(values):
             raise ValueError(
                 f"Exactly 2 values required, you provided {len(values)}"
             ) 
-        elif all(x < 1 for x in quantity_data_int):
+        elif any(x < 1 for x in quantity_data_int):
             raise ValueError(
                 "Student and questions must be atleast 1"
             )          
@@ -86,10 +86,10 @@ def update_data_quantity_worksheet(data_students_questions):
     Update quantity worksheet, add new row with the list data provided.
     Code adapted from love-sandwiches example project from CI course.
     """
-    print("Updating Quantity worksheet...\n")
+    print("Updating Quantity, Grade and Ponderation worksheets...\n")
     quantity_worksheet = SHEET.worksheet("quantity")
     quantity_worksheet.append_row(data_students_questions)
-    print("quantity worksheet updated successfully.\n")
+    print("Worksheets updated successfully.\n")
 
 
 data_students_questions = get_quantity_students_questions_data()
@@ -182,7 +182,6 @@ for i in range(1, number_students + 1):
         ponderation spreedsheets
         """
         print("Updating grade and ponderation worksheet...\n")
-        print(data_student_name)
         gradee_worksheet = SHEET.worksheet("grade")
         gradee_worksheet.append_row(data_student_name)
         ponderationn_worksheet = SHEET.worksheet("ponderation")
@@ -193,5 +192,146 @@ for i in range(1, number_students + 1):
     student_name.append(get_students_name())
     update_student_name(student_name)
 
-    
+    def get_questions_score():
+        """
+        Function used to ask the user for the different scores of each of
+        the input questions, for each student.
+        Will ask for score between 0 and 100 points for each question.
+        """
+        while True:
+            print(
+                f"Please enter the score for each of the {quantity_questions} "
+                f"questions for the student {student_name}."
+                )
+            print(
+                f"You must input {quantity_questions} integer numbers "
+                "separated with commas and each number should be "
+                "between 0 and 100 points."
+                )
+            questions_score_str = input("Enter the scores here:")
+            questions_score = questions_score_str.split(",")
 
+            if validate_score(questions_score):
+                print("Score for each question is valid!")
+                break
+        return questions_score
+
+    def validate_score(score_values):
+        """
+        Function that validates the score input by the user for each question
+        is between 0 and 100, only interger. Also will validate that the
+        quantity of different score input is equal to the quantity of
+        questions input. For each student.
+        """
+        quantity_score = score_values
+        quantity_score_int = (int(x) for x in quantity_score)   
+        try:
+            [int(score) for score in score_values]
+            if len(score_values) != quantity_questions:
+                raise ValueError(
+                    f"Exactly {quantity_questions} values required, you "
+                    f"provided {len(score_values)}"
+                ) 
+            elif any(x < 0 or x > 100 for x in quantity_score_int):
+                raise ValueError(
+                    "Score of each questions must be between 0 and 100"
+                )          
+
+        except ValueError as e:
+            print(f"Invalid data: {e}, please try again.\n")
+            return False
+
+        return True
+    
+    def update_questions_score_worksheet(data_score_questions):
+        """
+        Function that add the score of each question for each one of the
+        students to grade worksheet.
+        """
+        print("Updating grade worksheet...\n")
+        score_worksheet = SHEET.worksheet("grade")
+        score_worksheet.append_row(data_score_questions, table_range=f'B{i+1}')
+        print("grade worksheet updated successfully.\n")
+
+    data_score_questions = get_questions_score()
+    quantity_data = [int(num) for num in data_score_questions]
+    update_questions_score_worksheet(quantity_data)
+
+    def get_questions_ponderation():
+        """
+        Function used to ask the user for the different ponderation of each of
+        the input questions, for each student.
+        Will ask for ponderation between 0 and 100 % for each question.
+        Each % input per question added together should be exactly 100%.
+        """
+        while True:
+            print(
+                "Please enter the % of ponderation for each of the"
+                f"{quantity_questions} questions for the student"
+                f"{student_name}."
+                )
+            print(
+                f"You must input {quantity_questions} integer numbers "
+                "separated with commas and each number should be between "
+                "0 and 100.\n"
+                "For example an exam has two questions, first has a value "
+                "of 40% and second 60%, both % add in total 100% of the grade "
+                "of the exam."
+                )
+            questions_ponderation_str = input(
+                "Enter the numbers that represent% here:"
+                )
+            questions_ponderation = questions_ponderation_str.split(",")
+
+            if validate_ponderation(questions_ponderation):
+                print("Porcentage for each question is valid!")
+                break
+        return questions_ponderation
+
+    def validate_ponderation(ponderation_values):
+        """
+        Function that validates the porcentage input by the user for each
+        question is between 0 and 100, only interger. Also will validate
+        that the quantity of different porcentage input is equal to the
+        quantity of questions input. Finally will validate that the sum
+        of all the porcentage input is exactly 100%. For each student.
+        """
+        quantity_ponderation = ponderation_values
+        quantity_ponderation_int = (int(x) for x in quantity_ponderation)
+         
+        try:
+            [int(score) for score in ponderation_values]
+            add_ponderation = sum(quantity_ponderation_int)
+            if len(ponderation_values) != quantity_questions:
+                raise ValueError(
+                    f"Exactly {quantity_questions} values required, you provided\
+                         {len(ponderation_values)}"
+                ) 
+            elif any(x < 0 or x > 100 for x in quantity_ponderation_int):
+                raise ValueError(
+                    "Porcentage for each questions must be between 0 and 100"
+                )
+            elif (add_ponderation != 100):
+                raise ValueError(
+                    "All the % input together must add 100%"
+                )          
+
+        except ValueError as e:
+            print(f"Invalid data: {e}, please try again.\n")
+            return False
+
+        return True
+    
+    def update_questions_ponderation_worksheet(data_pond_questions):
+        """
+        Function that add the % of each question for each one of the students
+        to ponderation worksheet.
+        """
+        print("Updating grade worksheet...\n")
+        pond_worksheet = SHEET.worksheet("ponderation")
+        pond_worksheet.append_row(data_pond_questions, table_range=f'B{i+1}')
+        print("grade worksheet updated successfully.\n")
+
+    data_pond_questions = get_questions_ponderation()
+    quantity_ponderation = [int(num) for num in data_pond_questions]
+    update_questions_ponderation_worksheet(quantity_ponderation)
