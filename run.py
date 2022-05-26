@@ -182,16 +182,19 @@ for i in range(1, number_students + 1):
         ponderation spreedsheets
         """
         print("Updating grade and ponderation worksheet...\n")
-        gradee_worksheet = SHEET.worksheet("grade")
-        gradee_worksheet.append_row(data_student_name)
+        grade_worksheet = SHEET.worksheet("grade")
+        grade_worksheet.append_row(data_student_name)
         ponderationn_worksheet = SHEET.worksheet("ponderation")
         ponderationn_worksheet.append_row(data_student_name)
+        results_worksheet = SHEET.worksheet("results")
+        results_worksheet.append_row(data_student_name)
+
         print("Student name updated successfully.\n")  
 
     student_name = []
     student_name.append(get_students_name())
     update_student_name(student_name)
-
+    
     def get_questions_score():
         """
         Function used to ask the user for the different scores of each of
@@ -335,3 +338,49 @@ for i in range(1, number_students + 1):
     data_pond_questions = get_questions_ponderation()
     quantity_ponderation = [int(num) for num in data_pond_questions]
     update_questions_ponderation_worksheet(quantity_ponderation)
+
+    points_ponderated_question = []
+    grade_student = []
+
+    def get_grade():
+        """
+        """
+        for data, ponderation in zip(quantity_data, quantity_ponderation):
+            question = data*(ponderation/100)
+            points_ponderated_question.append(question)
+        round_list = [round(num) for num in points_ponderated_question]    
+        grade_student = sum(x for x in round_list)
+        
+        print(f"The final grade for {student_name} is {grade_student}")
+        return grade_student
+
+    grade = get_grade()
+
+    def get_pass_answer():
+        """
+        """ 
+        if (grade >= 60):
+            pass_grade = True
+        else:
+            pass_grade = False
+        print(f"Pass:{pass_grade}")
+        return pass_grade
+
+    answer = get_pass_answer()
+
+    def update_results_worksheet(grade_result, pass_result):
+        """
+        """
+        print(f"Updating results worksheet with {student_name} reults")
+        results_worksheet = SHEET.worksheet("results")
+        results_worksheet.append_row(grade_result, table_range=f'B{i+1}')
+        results_worksheet = SHEET.worksheet("results")
+        results_worksheet.append_row(pass_result, table_range=f'C{i+1}')
+        print("Results worksheet updated successfully.\n")
+
+    final_grade = []
+    final_pass_answer = []
+    final_grade.append(grade)
+    final_pass_answer.append(answer)
+    update_results_worksheet(final_grade, final_pass_answer)
+
