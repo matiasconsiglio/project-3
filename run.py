@@ -196,7 +196,7 @@ for i in range(1, number_students + 1):
         """
         Function used to ask the user for the different scores of each of
         the input questions, for each student.
-        Will ask for score between 0 and 100 points for each question.
+        Will ask for score between 0 and 100 points for each question .
         """
         while True:
             print(
