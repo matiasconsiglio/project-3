@@ -13,30 +13,22 @@ GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('project_3')
 
 
-def clean_worksheets():
+def clean_worksheets(worksheet, worksheet_title):
 
-    clean_results = SHEET.worksheet("results")
-    clean_results.clear()
-    clean_results_title = ["Student Name", "Final Grade", "Pass"]
-    clean_results.append_row(clean_results_title)
-
-    clean_quantity = SHEET.worksheet("quantity")
-    clean_quantity.clear()
-    clean_quantity_title = ["Number of Students", "Number of Questions"]
-    clean_quantity.append_row(clean_quantity_title)
-
-    clean_grade = SHEET.worksheet("grade")
-    clean_grade.clear()
-    clean_grade_title = ["Student Name"]
-    clean_grade.append_row(clean_grade_title)
-
-    clean_ponderation = SHEET.worksheet("ponderation")
-    clean_ponderation.clear()
-    clean_ponderation_title = ["Student Name"]
-    clean_ponderation.append_row(clean_ponderation_title)
+    clean_worksheet = SHEET.worksheet(worksheet)
+    clean_worksheet.clear()
+    clean_worksheet.append_row(worksheet_title)
 
 
-clean_worksheets()
+quantity_title = ["Number of Students", "Number of Questions"]
+grade_ponderation_title = ["Student Name"]
+results_title = ["Student Name", "Final Grade", "Pass"]
+
+clean_worksheets("quantity", quantity_title)
+clean_worksheets("grade", grade_ponderation_title)
+clean_worksheets("ponderation", grade_ponderation_title)
+clean_worksheets("results", results_title)
+
 
 print(
     "This program calculates the final grade of an exam. "
