@@ -22,7 +22,7 @@ def clean_worksheets(worksheet, worksheet_title):
 def get_quantity_students_questions_data():  
     """
     Get quantity of students and quantity of questions the exam has.
-    input from user.
+    input from the user.
     Run a while loop to collect a valid string of data from the user
     via the terminal, which must be a string of 2 numbers separated
     by comma. The loop will repeatedly request data, until it is valid.
@@ -69,7 +69,7 @@ def validate_data(data_students_questions):
             ) 
         elif any(x < 1 for x in quantity_data_int):
             raise ValueError(
-                "Student and questions must be atleast 1\n"
+                "Student and questions must be at least 1\n"
             )          
     except ValueError as e:
         print(f"Invalid data: {e}, please try again.\n")
@@ -95,8 +95,8 @@ def update_data_quantity_worksheet(data_students_questions):
 
 def generate_grade_ponderation_title(data_students_questions, worksheet_title):
     """
-    Generates tittle for grade and ponderation title worksheets.
-    will vary depending in quantity of questions as input.
+    Generates title for grade and ponderation title worksheets.
+    will vary depending on quantity of questions as input.
 
     Parameters: 
     data_students_questions list: Take as parameter quantity_data return from
@@ -132,7 +132,7 @@ def update_grade_ponderation_title(
     data_students_questions list: Take as parameter quantity_data return from
     get_quantity_students_questions_data(). List of 2 strings.
     worksheet_to_update: String that input worksheet to update.
-    location: String that input location in worksheet to update title.
+    location: String that input location in the worksheet to update the title.
     """
     grade_worksheet = SHEET.worksheet(worksheet_to_update)
     grade_worksheet.append_row(data_students_questions, table_range=location)
@@ -141,11 +141,11 @@ def update_grade_ponderation_title(
 def get_students_name(n):
     """
     Function used to ask the user for the different names of the students.
-    Will ask for the exact amount of names as students input from user.
+    Will ask for the exact amount of names as students input from the user.
     Use while until the input is valid as asked.
 
     Parameters:
-    n: int used for loop for asking student name depending of input
+    n: int used for loop for asking student name depending on input
     of how many students did the exam.
 
     Returns:
@@ -154,7 +154,7 @@ def get_students_name(n):
     while True:
         print(f"Please enter the name of the student {n}")
         print("The name must only contain letters")
-        student_name = input("Enter de name:")
+        student_name = input("Enter the name:")
         if validate_name(student_name):
             print("The name is valid!")
             break
@@ -170,7 +170,7 @@ def validate_name(name_value):
     student name for n.
 
     Returns:
-    boolean: True if student_name only contain alphabetic characters. False
+    boolean: True if student_name only contains alphabetic characters. False
     if not.
     """
     try:
@@ -190,7 +190,7 @@ def validate_name(name_value):
 
 def update_student_name(name_value):
     """
-    Function that add the name of the students to grade worksheet.
+    Function that adds the name of the students to grade worksheet.
 
     Parameters:
     name_value: takes as input student_name list with one string containing 
@@ -208,7 +208,7 @@ def get_questions_score(quantity_questions_exam, name_value):
     """
     Function used to ask the user for the different scores of each of
     the quantity input questions, for each student.
-    Will ask for score between 0 and 100 points for each question.
+    Will ask for a score between 0 and 100 points for each question.
 
     Parameters:
     quantity_questions_exam: int that indicates the quantity of questions
@@ -242,7 +242,7 @@ def get_questions_score(quantity_questions_exam, name_value):
 def validate_score(score_values, quantity_questions_exam):
     """
     Function that validates the score input by the user for each question
-    is between 0 and 100, only interger. Also validates that the
+    is between 0 and 100, only integer. Also validates that the
     quantity of different score input is equal to the quantity of
     questions input. For each student.
 
@@ -279,7 +279,7 @@ def validate_score(score_values, quantity_questions_exam):
 def update_questions_score_worksheet(score_values, n):
     """
     Function that add the score of each question for each one of the
-    students to grade worksheet.
+    students to grade the worksheet.
 
     Parameters:
     score_values: questions_score return from get_questions_score
@@ -298,7 +298,7 @@ def get_questions_ponderation(quantity_questions_exam):
     """
     Function used to ask the user for the different ponderation of each of
     the input questions, for each student.
-    Will ask for ponderation between 0 and 100 % for each question.
+    Will ask for ponderation numbers between 0 and 100 % for each question.
     Each % input per question added together should be exactly 100%.
 
     Parameters:
@@ -330,16 +330,16 @@ def get_questions_ponderation(quantity_questions_exam):
         if validate_ponderation(
             questions_ponderation, quantity_questions_exam
         ):
-            print("Porcentage for each question is valid!")
+            print("Percentage for each question is valid!")
             break
     return questions_ponderation
 
 
 def validate_ponderation(ponderation_values, quantity_questions_exam):
     """
-    Function that validates the porcentage input by the user for each
-    question is between 0 and 100, only interger. Also will validate
-    that the quantity of different porcentage input is equal to the
+    Function that validates the percentage input by the user for each
+    question is between 0 and 100, only integer. Also will validate
+    that the quantity of different percentage input is equal to the
     quantity of questions input. Finally will validate that the sum
     of all the porcentage input is exactly 100%. For each student.
 
@@ -367,7 +367,7 @@ def validate_ponderation(ponderation_values, quantity_questions_exam):
             ) 
         elif any(x <= 0 or x > 100 for x in quantity_ponderation_int):
             raise ValueError(
-                "Porcentage for each questions must be between 0 and 100\n"
+                "Percentage for each questions must be between 0 and 100\n"
             )
 
     except ValueError as e:
@@ -380,7 +380,7 @@ def validate_ponderation(ponderation_values, quantity_questions_exam):
 def update_questions_ponderation_worksheet(ponderation_values):
     """
     Function that add the % of each question for each one of the students
-    to ponderation worksheet.
+    to the ponderation worksheet.
     Parameters:
     ponderation_values:list with str that contains the ponderation of
     each question the exam has.
@@ -406,7 +406,7 @@ def get_grade(data_students_questions, ponderation_values, name_value):
     student name for n.
 
     Returns
-    grade_student: int that correspond to the final grade of the student n.
+    grade_student: int that corresponds to the final grade of the student n.
     """
     points_ponderated_question = []
     grade_student = []
@@ -423,13 +423,13 @@ def get_grade(data_students_questions, ponderation_values, name_value):
 def get_pass_answer(grade):
     """
     Function that takes as input the final grade of the student n.
-    calculates if the student pass the exam or not.
+    calculates if the student passes the exam or not.
 
     Parameters:
     grade: int, return from get_grade() grade_student:
     int that correspond to the final grade of the student n.
     Returns:
-    boolean: True if grade is equal or higher thant 60 points.
+    boolean: True if grade is equal or higher than 60 points.
     else false. if True student Pass
     """ 
     if (grade >= 60):
@@ -450,14 +450,14 @@ def update_results_worksheet(
     Parameters:
     grade: int, return from get_grade() grade_student:
     int that correspond to the final grade of the student n.
-    pass_result: boolean True if grade is equal or higher thant 60 points.
+    pass_result: boolean True if grade is equal or higher than 60 points.
     else false. if True student Pass.
     name_value: takes as input student_name list with one string containing 
     student name for n.
-    n: indicates wich students the loop is when this functions is called.
+    n: indicates which students the loop is when this function is called.
     helps to indicate where to locate the data in the grade worksheet.
     """
-    print(f"Updating results worksheet with {name_value} reults")
+    print(f"Updating results worksheet with {name_value} results")
     results_worksheet = SHEET.worksheet("results")
     results_worksheet.append_row(grade, table_range=f'B{n+1}')
     results_worksheet = SHEET.worksheet("results")
@@ -469,10 +469,10 @@ def loop_data_input(
     quantity_questions_exam, quantity_of_students, ponderation_values
 ):
     """
-    Loop function that ask the name of the student i, ask for 
+    Loop function that asks the name of the student i, asks for 
     the points the student i score per question. Updates the grade 
-    worksheet with the scores. Calculates de final grade for the student i.
-    Check if the student i pass or not. Finally updates this information
+    worksheet with the scores. Calculates the final grade for the student i.
+    Check if the student i passes or not. Finally updates this information
     to the results worksheet.
 
     quantity_questions_exam: int that indicates the quantity of questions
@@ -528,14 +528,14 @@ def main():
         "First takes as input the quantity of students and questions of the "
         "exam. Second takes as input the score per question and the percentage"
         " each question ponderates from the global grade. "
-        "In this hypotetical program the grading works from 0 to 100 points. "
+        "In this hypothetical program the grading works from 0 to 100 points. "
         "0 is the minumum score and 100 is the maximum score. "
         "To pass the student needs to have a score higher or equal to 60 "
-        "points. For example an exam has 2 questions. A random student gets " 
+        "points. For example, an exam has 2 questions. A random student gets " 
         "30 points in the first question and 80 points in the second. "
         "The first question has a weight of 30% of the global grade and "
         "the second question has a weight of 70% of the global grade. "
-        "The student global grade would be 65 points. Pass.\n "
+        "The student global's grade would be 65 points. Pass.\n "
     )
 
     data_students_questions = get_quantity_students_questions_data()
