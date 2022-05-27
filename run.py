@@ -29,10 +29,10 @@ def get_quantity_students_questions_data():
     Code adapted from love-sandwiches example project from CI course.
 
     Returns:
-    list: List with 2 strings separated by comma, Example ['2','3']
+    quantity_data: List with 2 strings separated by comma, Example ['2','3']
     """
     while True:
-        print("Please enter quantity of students and questions from exam")
+        print("Please enter quantity of students and questions from the exam.")
         print("Data should be two integer numbers, separated by commas.")
         print("Example: 2,3")
         quantity_str = input("Enter your data here: ")
@@ -43,7 +43,7 @@ def get_quantity_students_questions_data():
     return quantity_data
 
 
-def validate_data(values):
+def validate_data(data_students_questions):
     """
     Inside the try, converts all string values into integers.
     Raises ValueError if strings cannot be converted into int,
@@ -51,24 +51,25 @@ def validate_data(values):
     Code adapted from love-sandwiches example project from CI course.
 
     Parameters:
-    values list: Take as parameter quantity_data return from
+    data_students_questions: Take as parameter quantity_data return from
     get_quantity_students_questions_data(). List of 2 strings.
 
     Return:
     boolean: True if all conditions apply as asked by the function. 
     False if not.    
     """
-    quantity = values
+    quantity = data_students_questions
     quantity_data_int = (int(x) for x in quantity)   
     try:
-        [int(value) for value in values]
-        if len(values) != 2:
+        [int(value) for value in data_students_questions]
+        if len(data_students_questions) != 2:
             raise ValueError(
-                f"Exactly 2 values required, you provided {len(values)}"
+                "Exactly 2 values required, you provided"
+                f"{len(data_students_questions)}\n"
             ) 
         elif any(x < 1 for x in quantity_data_int):
             raise ValueError(
-                "Student and questions must be atleast 1"
+                "Student and questions must be atleast 1\n"
             )          
     except ValueError as e:
         print(f"Invalid data: {e}, please try again.\n")
@@ -178,7 +179,7 @@ def validate_name(name_value):
 
         else:
             raise ValueError(
-                "The student name must be conformed by letters"
+                "The student name must be conformed by letters\n"
             )
             return False
     except ValueError as e:
@@ -195,7 +196,7 @@ def update_student_name(name_value):
     name_value: takes as input student_name list with one string containing 
     student name for n.
     """
-    print("Updating grade and ponderation worksheet...\n")
+    print("Updating grade and results worksheet...\n")
     grade_worksheet = SHEET.worksheet("grade")
     grade_worksheet.append_row(name_value)
     results_worksheet = SHEET.worksheet("results")
@@ -222,7 +223,7 @@ def get_questions_score(quantity_questions_exam, name_value):
     while True:
         print(
             f"Please enter the score for each of the {quantity_questions_exam}"
-            f"questions for the student {name_value}."
+            f" questions for the student {name_value}."
             )
         print(
             f"You must input {quantity_questions_exam} integer numbers "
@@ -255,19 +256,18 @@ def validate_score(score_values, quantity_questions_exam):
     Returns:
     boolean: True if all conditions apply as asked by the function. 
     False if not. 
-    """
-    quantity_score = score_values
-    quantity_score_int = (int(x) for x in quantity_score)   
+    """  
+ 
     try:
-        [int(score) for score in score_values]
+        quantity_score_int = [int(x) for x in score_values]
         if len(score_values) != quantity_questions_exam:
             raise ValueError(
                 f"Exactly {quantity_questions_exam} values required, you "
-                f"provided {len(score_values)}"
+                f"provided {len(score_values)}\n"
             ) 
         elif any(x < 0 or x > 100 for x in quantity_score_int):
             raise ValueError(
-                "Score of each questions must be between 0 and 100"
+                "Score of each questions must be between 0 and 100\n"
             )          
 
     except ValueError as e:
@@ -291,7 +291,7 @@ def update_questions_score_worksheet(score_values, n):
     print("Updating grade worksheet...\n")
     score_worksheet = SHEET.worksheet("grade")
     score_worksheet.append_row(score_values, table_range=f'B{n+1}')
-    print("grade worksheet updated successfully.\n")
+    print("Grade worksheet updated successfully.\n")
 
 
 def get_questions_ponderation(quantity_questions_exam):
@@ -311,8 +311,8 @@ def get_questions_ponderation(quantity_questions_exam):
     """
     while True:
         print(
-            "Please enter the % of ponderation for each of the"
-            f"{quantity_questions_exam} questions for the exam"
+            "Please enter the % of ponderation for each of the "
+            f"{quantity_questions_exam} question(s) of the exam"
             )
         print(
             f"You must input {quantity_questions_exam} integer numbers "
@@ -323,7 +323,7 @@ def get_questions_ponderation(quantity_questions_exam):
             "of the exam."
             )
         questions_ponderation_str = input(
-            "Enter the numbers that represent % here:"
+            "Enter the numbers that represent each % here:"
             )
         questions_ponderation = questions_ponderation_str.split(",")
 
@@ -352,25 +352,23 @@ def validate_ponderation(ponderation_values, quantity_questions_exam):
     boolean: True if all conditions apply as asked by the function. 
     False if not. 
     """
-    quantity_ponderation = ponderation_values
-    quantity_ponderation_int = (int(x) for x in quantity_ponderation)
-        
+           
     try:
-        [int(score) for score in ponderation_values]
+        quantity_ponderation_int = [int(x) for x in ponderation_values]
         add_ponderation = sum(quantity_ponderation_int)
         if len(ponderation_values) != quantity_questions_exam:
             raise ValueError(
                 f"Exactly {quantity_questions_exam} values required, you provided\
-                        {len(ponderation_values)}"
+                        {len(ponderation_values)}\n"
             ) 
-        elif any(x < 0 or x > 100 for x in quantity_ponderation_int):
-            raise ValueError(
-                "Porcentage for each questions must be between 0 and 100"
-            )
         elif (add_ponderation != 100):
             raise ValueError(
-                "All the % input together must add 100%"
-            )          
+                "All the % input together must add 100%\n"
+            ) 
+        elif any(x <= 0 or x > 100 for x in quantity_ponderation_int):
+            raise ValueError(
+                "Porcentage for each questions must be between 0 and 100\n"
+            )
 
     except ValueError as e:
         print(f"Invalid data: {e}, please try again.\n")
@@ -390,7 +388,7 @@ def update_questions_ponderation_worksheet(ponderation_values):
     print("Updating ponderation worksheet...\n")
     pond_worksheet = SHEET.worksheet("ponderation")
     pond_worksheet.append_row(ponderation_values)
-    print("ponderation worksheet updated successfully.\n")
+    print("Ponderation worksheet updated successfully.\n")
 
 
 def get_grade(data_students_questions, ponderation_values, name_value):
@@ -532,7 +530,7 @@ def main():
         " each question ponderates from the global grade. "
         "In this hypotetical program the grading works from 0 to 100 points. "
         "0 is the minumum score and 100 is the maximum score. "
-        "To pass the student needs to have a score higher or equal to 60"
+        "To pass the student needs to have a score higher or equal to 60 "
         "points. For example an exam has 2 questions. A random student gets " 
         "30 points in the first question and 80 points in the second. "
         "The first question has a weight of 30% of the global grade and "
