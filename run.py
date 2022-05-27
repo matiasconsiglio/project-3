@@ -35,7 +35,7 @@ def get_quantity_students_questions_data():
         print("Please enter quantity of students and questions from the exam.")
         print("Data should be two integer numbers, separated by commas.")
         print("Example: 2,3")
-        quantity_str = input("Enter your data here: ")
+        quantity_str = input("Enter your data here:\n")
         quantity_data = quantity_str.split(",")
         if validate_data(quantity_data):
             print("Data is valid!")
@@ -154,7 +154,7 @@ def get_students_name(n):
     while True:
         print(f"Please enter the name of the student {n}")
         print("The name must only contain letters")
-        student_name = input("Enter the name:")
+        student_name = input("Enter the name:\n")
         if validate_name(student_name):
             print("The name is valid!")
             break
@@ -230,7 +230,7 @@ def get_questions_score(quantity_questions_exam, name_value):
             "separated with commas and each number should be "
             "between 0 and 100 points."
             )
-        questions_score_str = input("Enter the scores here:")
+        questions_score_str = input("Enter the scores here:\n")
         questions_score = questions_score_str.split(",")
 
         if validate_score(questions_score, quantity_questions_exam):
@@ -323,7 +323,7 @@ def get_questions_ponderation(quantity_questions_exam):
             "of the exam."
             )
         questions_ponderation_str = input(
-            "Enter the numbers that represent each % here:"
+            "Enter the numbers that represent each % here:\n"
             )
         questions_ponderation = questions_ponderation_str.split(",")
 
