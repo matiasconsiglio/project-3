@@ -12,6 +12,32 @@ SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('project_3')
 
+
+def clean_worksheets():
+
+    clean_results = SHEET.worksheet("results")
+    clean_results.clear()
+    clean_results_title = ["Student Name", "Final Grade", "Pass"]
+    clean_results.append_row(clean_results_title)
+
+    clean_quantity = SHEET.worksheet("quantity")
+    clean_quantity.clear()
+    clean_quantity_title = ["Number of Students", "Number of Questions"]
+    clean_quantity.append_row(clean_quantity_title)
+
+    clean_grade = SHEET.worksheet("grade")
+    clean_grade.clear()
+    clean_grade_title = ["Student Name"]
+    clean_grade.append_row(clean_grade_title)
+
+    clean_ponderation = SHEET.worksheet("ponderation")
+    clean_ponderation.clear()
+    clean_ponderation_title = ["Student Name"]
+    clean_ponderation.append_row(clean_ponderation_title)
+
+
+clean_worksheets()
+
 print(
     "This program calculates the final grade of an exam. "
     "First takes as input the quantity of students and questions of the exam. "
@@ -383,4 +409,4 @@ for i in range(1, number_students + 1):
     final_grade.append(grade)
     final_pass_answer.append(answer)
     update_results_worksheet(final_grade, final_pass_answer)
-
+    
