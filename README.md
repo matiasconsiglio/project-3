@@ -1,38 +1,12 @@
-![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
+# Exam Results
 
-Welcome matiasconsiglio,
+This program calculates the final grade of an exam. First takes as input the quantity of students and questions of the exam. Second takes as input the percentage each question ponderates from the global grade. Then the program will ask for the first student name, later will ask for the score per question for that student. The program will continue asking for students names and scores until the last student. For each student the program will calculate and show the final grade and if the student passes the exam.
 
-This is the Code Institute student template for deploying your third portfolio project, the Python command-line project. The last update to this file was: **August 17, 2021**
+In this hypothetical program the grading works from 0 to 100 points. 0 is the minumum score and 100 is the maximum score. To pass the student needs to have a score higher or equal to 60 points. For example, an exam has 2 questions. A random student gets 30 points in the first question and 80 points in the second. The first question has a weight of 30% of the global grade and the second question has a weight of 70% of the global grade. The student global's grade would be 65 points. Pass.
 
-## Reminders
+All the information is added to google spreadsheets. When the program is runned again, all the worksheets gets cleaned and inserted with titles... Ready for a new run. 
 
-* Your code must be placed in the `run.py` file
-* Your dependencies must be placed in the `requirements.txt` file
-* Do not edit any of the other files or your code may not deploy properly
-
-## Creating the Heroku app
-
-When you create the app, you will need to add two buildpacks from the _Settings_ tab. The ordering is as follows:
-
-1. `heroku/python`
-2. `heroku/nodejs`
-
-You must then create a _Config Var_ called `PORT`. Set this to `8000`
-
-If you have credentials, such as in the Love Sandwiches project, you must create another _Config Var_ called `CREDS` and paste the JSON into the value field.
-
-Connect your GitHub repository and deploy as normal.
-
-## Constraints
-
-The deployment terminal is set to 80 columns by 24 rows. That means that each line of text needs to be 80 characters or less otherwise it will be wrapped onto a second line.
-
------
-Happy coding!
-
-# MaTT
-
-Matt is a personal DJ/Artist webpage. The intention of this webpage is to be able for MaTT to show his information, audiovisual portfolio and to have the possibility to connect with clubs, party organizations or simple individuals that want to connect with him. On the other side the webpage offers value and works as a tool for connecting people who need a Dj with MaTT.
+[Here is the live version of my project](https://project-3-exam-results.herokuapp.com/)
 
 ## Features
 
