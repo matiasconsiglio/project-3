@@ -16,8 +16,8 @@ SHEET = GSPREAD_CLIENT.open('project_3')
 def clean_worksheets(worksheet, worksheet_title):
     """
     First function called to clean the worksheets.
-    Generates new titles for worksheets every time,
-    the program is run a new time.
+    Generates new titles for worksheets every time
+    the program is run.
 
     Parameteres:
     worksheet: str with the name of the worksheet.
