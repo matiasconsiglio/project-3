@@ -160,7 +160,7 @@ def get_students_name(number_name):
     student_name: list with one string containing student name for n.
     """
     while True:
-        print(f"Please enter the name of the student {number_name}")
+        print(f"Please enter the name of the student {number_name}.")
         print("The name must contain letters. Also space is allowed.")
         student_name = input("Enter the name:\n")
         if validate_name(student_name):
@@ -422,7 +422,7 @@ def get_grade(data_students_questions, ponderation_values, name_value):
         points_ponderated_question.append(question)
     round_list = [round(num) for num in points_ponderated_question]
     grade_student = sum(x for x in round_list)
-    print(f"The final grade for {name_value} is {grade_student} points")
+    print(f"The final grade for {name_value} is {grade_student} points.")
     return grade_student
 
 
@@ -464,7 +464,7 @@ def update_results_worksheet(
     is called. Helps to indicate where to locate the data in the grade
     worksheet.
     """
-    print(f"Updating results worksheet with {name_value} results")
+    print(f"Updating results worksheet with {name_value} results.")
     results_worksheet = SHEET.worksheet("results")
     results_worksheet.append_row(grade, table_range=f'B{number_name+1}')
     results_worksheet = SHEET.worksheet("results")

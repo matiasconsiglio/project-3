@@ -59,6 +59,7 @@ Responsive on all device sizes and has interactive elements.
     - Ask the user to input the number of "%" depending on how much questions the user initialy input.
     - Explain how the input must be in this case 2 integers separated by comma. If the user input initialy 3 questions the program will ask the user to input 3 different "%".
     - Gives an example of how the input must me explaining an hipotetical case.
+    - Each input must be between 1 and 99 %. A question can't have 0 % of value.
     - Shows the place for the input.
     - For all cases the add of all "%" as input must add 100%, for this case the 2 "%" must add 100%. 
 
@@ -68,7 +69,7 @@ Responsive on all device sizes and has interactive elements.
     - For this scenario the input was: percentage 1 = 40% and percentage 2 = 60% So: 40,60
     - Output message for valid data.
     - Let the user know that the data is being updated in the Ponderation worksheet.
-    - Let the user know that the data was succsesfully updated to worksheets.
+    - Let the user know that the data was succsesfully updated to worksheet.
     - Program updates ponderation worksheet with "%" for 2 questions: "40" and "60". The ponderation worksheet will not be updated anymore.
 
 ![Second Output: Valid data and data saved to worksheets](/assets/readme-images/second_output.png)
@@ -76,26 +77,53 @@ Responsive on all device sizes and has interactive elements.
 - Third Input: Name of first student.
 
     - Ask the user to input the name of the first student.
-    - Ask the user to input the name of the student with just alphabetical characters. 
+    - Ask the user to input the name of the student with just alphabetical characters. "space" is also allowed. User can enter only First name, Only Last name or both together.
+    - Program is not affected by uppercase or lowercasse letters.
     - Shows the place for the input.
   
 ![Third Input: Name of first student](/assets/readme-images/third_input.png)
-- Output from Second Input.
+- Output from Third Input.
 
-    - For this scenario the input was: percentage 1 = 40% and percentage 2 = 60% So: 40,60
+    - For this scenario the input was: Matias Castro
     - Output message for valid data.
-    - Let the user know that the data is being updated in the Ponderation worksheet.
+    - Let the user know that the data is being updated in the grade and results worksheets.
     - Let the user know that the data was succsesfully updated to worksheets.
-    - Program updates ponderation worksheet with "%" for 2 questions: "40" and "60". The ponderation worksheet will not be updated anymore.
 
-![Second Output: Valid data and data saved to worksheets](/assets/readme-images/second_output.png)
-![Ponderation worksheet updated](/assets/readme-images/ponderation_updated_2.png)
+![Third Output: Valid student name and name saved to worksheets](/assets/readme-images/third_output.png)
+![grade worksheet updated](/assets/readme-images/grade_updated_2.png)
+![results worksheet updated](/assets/readme-images/results_updated.png)
+- Fourth Input: Score for each question of first student.
+
+    - Ask the user to input the score for each question of the exam.
+    - Ask the user to input the number of "socres" depending on how much questions the user initialy input.
+    - Explain how the input must be in this case 2 integers separated by comma. If the user input initialy 3 questions the program will ask the user to input 3 different socres.
+    - Each score must be between 0 and 100.
+    - Shows the place for the input.
+  
+![Fourth Input: Score for each question of first student.](/assets/readme-images/fourth_input.png)
+- Output from Fourth Input.
+
+    - For this scenario the input was: score 1 = 55 points and score 2 = 65 points. So: 55,65
+    - Output message for valid data.
+    - Let the user know that the data is being updated in the grade worksheet.
+    - Let the user know that the data was succsesfully updated to the worksheet.
+    - Output result for current student "Matias Castro". Final grade of 61 points and the student passes because the final score is equal or higher than 60 points.
+    - Let the user know that the data is being updated in the results worksheet.
+    - Let the user know that the data was succsesfully updated to worksheet.
+
+
+![Fourth Output: Valid score per question, final grade, and pass result... Information saved to worksheets](/assets/readme-images/fourth_output.png)
+![grade worksheet updated](/assets/readme-images/grade_updated_2.png)
+![results worksheet updated](/assets/readme-images/results_updated.png)
+
+
 
 ## Features Left to Implement
 
 - Allow the user to download the google spreadsheets with all the input and output information.
 - Combine quantity and ponderation worksheets together.
 - Combine grade and results worksheets together.
+- Asking for only First and Last name option as student name, both with uppercase in the first letter.
 
 ## User Experience (UX)
 
@@ -155,6 +183,7 @@ Responsive on all device sizes and has interactive elements.
 
 - App wont work properly on smartphone.
 - When user input a negative % with a positive % that adds on 100% for the ponderation input the data was shown as valid. Bug fixed, problem in code line 273 "quantity_ponderation_int = [int(x) for x in ponderation_values]". Used "()" instead of "[]", function was created instead of list. Bug fixed with the help of the mentor.
+- Name of student can only contain alphabetic charaters. This means that no "space" allowed. So the program only accepts first name or last name.
 - No more Bugs.
 
 ## Deployment
