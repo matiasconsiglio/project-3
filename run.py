@@ -528,12 +528,18 @@ def main():
     clean_worksheets("grade", grade_title)
     clean_worksheets("ponderation", None)
     clean_worksheets("results", results_title)
+    print('Welcome to "Exam Results" project!\n')
 
     print(
         "This program calculates the final grade of an exam. "
         "First takes as input the quantity of students and questions of the "
-        "exam. Second takes as input the score per question and the percentage"
-        " each question ponderates from the global grade. "
+        "exam. Second takes as input the percentage each question "
+        "ponderates from the global grade. Then the program will ask for the "
+        "first student name, later will ask for the score per question for "
+        "that student. The program will continue asking for students names and"
+        " scores until the last student. For each student the program will "
+        "calculate and show the final grade and if the student passes "
+        "the exam.\n"
         "In this hypothetical program the grading works from 0 to 100 points. "
         "0 is the minumum score and 100 is the maximum score. "
         "To pass the student needs to have a score higher or equal to 60 "
