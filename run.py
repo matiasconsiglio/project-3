@@ -184,12 +184,12 @@ def validate_name(name_value):
     if not.
     """
     try:
-        if all(x.isalpha or x.isspace for x in name_value):
+        if all(x.isalpha() or x.isspace() for x in name_value):
             return True
-
         else:
             raise ValueError(
-                "The student name must be conformed by letters\n"
+                "The student name must be conformed by letters. "
+                "Can contain space.\n"
             )
     except ValueError as error:
         print(f"Invalid data: {error}, please try again.\n")

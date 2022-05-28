@@ -179,11 +179,22 @@ Responsive on all device sizes and has interactive elements.
 
     - In the Existing Features section, was shown how the program works and what to expect with correct input. Tested and every feature works properly. For terms of space this process will not be repeated since was already done.
 
-- Incorrect Input 
+- Incorrect Input for quantity of students and questions: 
 
-    - Input for quantity of students and questions: letters, more or less than 2 inputs,  less than 1 student or 1 questions including negatives.  
+    - Input: not integer, more or less than 2 inputs, less than 1 student or 1 questions including negatives.  
 
-![Accessibility Lighthouse](/assets/readme-images/lighthouse.png)
+![Not integer error](/assets/readme-images/not_int_error_1.png)
+![More or less than 2 inputs error](/assets/readme-images/not_2_input.png)
+![Less than error](/assets/readme-images/less_than_1.png)
+
+- Incorrect Input for % of each question of ponderation of total grade: 
+
+    - Input: not integer, more or less inputs than quantity of question input, percentage higher than 100 or lower than 0, add of different % resulting different than 100%. 
+
+![Not integer error](/assets/readme-images/ponderation_no_int.png)
+![More or less inputs than quantity of question input](/assets/readme-images/ponderation_more_less_inputs.png)
+![Percentage higher than 100 or lower than 0](/assets/readme-images/ponderation_outbounds.png)
+
 ### Different View by Device
 
 - Web
@@ -199,7 +210,7 @@ Responsive on all device sizes and has interactive elements.
 
 - App wont work properly on smartphone.
 - When user input a negative % with a positive % that adds on 100% for the ponderation input the data was shown as valid. Bug fixed, problem in code line 273 "quantity_ponderation_int = [int(x) for x in ponderation_values]". Used "()" instead of "[]", function was created instead of list. Bug fixed with the help of the mentor.
-- Name of student can only contain alphabetic charaters. This means that no "space" allowed. So the program only accepts first name or last name.
+- Name of student can be first name, last name or both together, no uppercase or lowercase restriction included.
 - No more Bugs.
 
 ## Deployment
