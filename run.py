@@ -547,7 +547,7 @@ def main():
         "30 points in the first question and 80 points in the second. "
         "The first question has a weight of 30% of the global grade and "
         "the second question has a weight of 70% of the global grade. "
-        "The student global's grade would be 65 points. Pass.\n "
+        "The student global's grade would be 65 points. Pass.\n"
         "While the program runs it saves all the information in "
         "Google Spreadsheets.\n"
     )
