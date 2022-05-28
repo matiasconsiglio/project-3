@@ -50,7 +50,7 @@ def get_quantity_students_questions_data():
         if validate_data(quantity_data):
             print("Data is valid!")
             break
-        return quantity_data
+    return quantity_data
 
 
 def validate_data(data_students_questions):
