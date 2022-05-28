@@ -111,12 +111,30 @@ Responsive on all device sizes and has interactive elements.
     - Let the user know that the data is being updated in the results worksheet.
     - Let the user know that the data was succsesfully updated to worksheet.
 
-
 ![Fourth Output: Valid score per question, final grade, and pass result... Information saved to worksheets](/assets/readme-images/fourth_output.png)
-![grade worksheet updated](/assets/readme-images/grade_updated_2.png)
-![results worksheet updated](/assets/readme-images/results_updated.png)
+![grade worksheet updated](/assets/readme-images/grade_updated_3.png)
+![results worksheet updated](/assets/readme-images/results_updated_2.png)
+- Loop Input
 
+    - After grade and exam result for student one, the program will continue asking for all the students names and the scores they got in each one of the questions from the exam.
 
+- Loop Output
+
+    - As the program give the output of the final grade and pass result to the first student, will continue to give the final grade and pass result for each student.
+    - Final grade rounded with round() function.
+
+![Loop Input Output: repeat process of input and output for every student.](/assets/readme-images/loop.png)
+![Final grade worksheet updated](/assets/readme-images/final_grade.png)
+![Final results worksheet updated](/assets/readme-images/final_results.png)
+
+- Runnning the program again
+
+    - If the user decides to run the program again. At the start of it, the program will clear all the worksheets and add specific titles for each one of them.
+
+![Cleaned quantity worksheet](/assets/readme-images/quantity_initial.png)
+![Cleaned grade worksheet](/assets/readme-images/grade_initial.png)
+![Cleaned ponderation worksheet](/assets/readme-images/ponderation_initial.png)
+![Cleaned results worksheet](/assets/readme-images/results_initial.png)
 
 ## Features Left to Implement
 
@@ -129,27 +147,26 @@ Responsive on all device sizes and has interactive elements.
 
 ### User stories as first time visitor goals
 
-- As a First Time Visitor, I want to easily understand the main purpose of the site and learn more about the Artist.
-- As a First Time Visitor, I want to be able to navigate throughout the site in an easy way and be able to understand the content.
-- As a First Time Visitor, I want to look for testimonials from the Artist to learn more about him and the intentions with the webpage. I also want to locate their social media links to see their followings on social media to determine how trusted and known they are.
+- As a First Time Visitor, I want to easily understand the main purpose of the program.
+- As a First Time Visitor, I want to be able to navigate throughout the program in an easy way and be able to understand the content.
+- As a First Time Visitor, I want to be able of getting information back from the program.
 
 ### Testing User Stories from User Experience (UX) Section
 
-- As a First Time Visitor, I want to easily understand the main purpose of the site and learn more about the Artist.
+- As a First Time Visitor, I want to easily understand the main purpose of the program.
 
-    - Users are greeted with an image of the Artist plus a phrase from him.
-    - Thanks to the Bio and Media sections the user can learn more from the life of the Artist and also listen/watch some of his work as a DJ. Both of this helps to understand the value of the Artist and his intentions with the webpage.
-    - Thanks to the contact form and the footer the users are able to either get to know more about the Artist or contact him directly.
+    - Users are greeted with a welcome message.
+    - Users can have fast access to the instructions and purpous of the program.
+    - Users are given example of what the program does.
 
-- As a First Time Visitor, I want to be able to navigate throughout the site in an easy way and be able to understand the content.
+- As a First Time Visitor, I want to be able to navigate throughout the program in an easy way and be able to understand the content.
 
-    - The header and the footer will give company to the users while they navigate the whole site, giving them easy access to it and also to get to know more about the Artist or directly contact him.
-    - The content itself of the site is self-explanatory, user-friendly.
+    - The program is giving information and explaining what it expects as input from the user through the whole proccess.
+    - The program is giving feedback continuesly through the program via Output for the user to understand what is happening and what comes next.
 
-- As a First Time Visitor, I want to look for testimonials from the Artist to learn more about him and the intentions with the webpage. I also want to locate their social media links to see their followings on social media to determine how trusted and known they are.
+- As a First Time Visitor, I want to be able of getting information back from the program.
 
-    - The Bio gives initial information about the artist.
-    - The site gives the opportunity to get to know the artist and the followers thanks to direct links to his social-media accounts.
+    - The program after every input from the user gives and output with preciss information for the user to keep a clear understand of what is happening.
 
 ## Testing
 
@@ -158,14 +175,13 @@ Responsive on all device sizes and has interactive elements.
     - No errors were returned when passing through the official pep8online.com validator.
 
 ![PEP8 Validator](/assets/readme-images/pep8online.png)
-- CSS
+- Correct input
 
-    - No errors were returned when passing through the official W3C validator.
+    - In the Existing Features section, was shown how the program works and what to expect with correct input. Tested and every feature works properly. For terms of space this process will not be repeated since was already done.
 
-![CSS Validator](/assets/readme-images/css_validator.png)
-- Web Developer Tool -  Lighthouse 
+- Incorrect Input 
 
-    - 94% Accessibility.
+    - Input for quantity of students and questions: letters, more or less than 2 inputs,  less than 1 student or 1 questions including negatives.  
 
 ![Accessibility Lighthouse](/assets/readme-images/lighthouse.png)
 ### Different View by Device

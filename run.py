@@ -72,7 +72,7 @@ def validate_data(data_students_questions):
         quantity_data_int = [int(x) for x in data_students_questions]
         if len(quantity_data_int) != 2:
             raise ValueError(
-                "Exactly 2 values required, you provided"
+                "Exactly 2 values required, you provided: "
                 f"{len(quantity_data_int)}\n"
             )
         elif any(x < 1 for x in quantity_data_int):
