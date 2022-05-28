@@ -14,12 +14,22 @@ SHEET = GSPREAD_CLIENT.open('project_3')
 
 
 def clean_worksheets(worksheet, worksheet_title):
+    """
+    First function called to clean the worksheets.
+    Generates new titles for worksheets every time,
+    the program is run a new time.
+
+    Parameteres:
+    worksheet: str with the name of the worksheet.
+    worksheet_title: str with the tittle for each
+    worksheet.
+    """
     clean_worksheet = SHEET.worksheet(worksheet)
     clean_worksheet.clear()
     clean_worksheet.append_row(worksheet_title)
 
 
-def get_quantity_students_questions_data():  
+def get_quantity_students_questions_data():
     """
     Get quantity of students and quantity of questions the exam has.
     input from the user.
@@ -39,8 +49,8 @@ def get_quantity_students_questions_data():
         quantity_data = quantity_str.split(",")
         if validate_data(quantity_data):
             print("Data is valid!")
-            break        
-    return quantity_data
+            break
+        return quantity_data
 
 
 def validate_data(data_students_questions):
@@ -55,24 +65,22 @@ def validate_data(data_students_questions):
     get_quantity_students_questions_data(). List of 2 strings.
 
     Return:
-    boolean: True if all conditions apply as asked by the function. 
-    False if not.    
+    boolean: True if all conditions apply as asked by the function.
+    False if not.
     """
-    quantity = data_students_questions
-    quantity_data_int = (int(x) for x in quantity)   
     try:
-        [int(value) for value in data_students_questions]
-        if len(data_students_questions) != 2:
+        quantity_data_int = [int(x) for x in data_students_questions]
+        if len(quantity_data_int) != 2:
             raise ValueError(
                 "Exactly 2 values required, you provided"
-                f"{len(data_students_questions)}\n"
-            ) 
+                f"{len(quantity_data_int)}\n"
+            )
         elif any(x < 1 for x in quantity_data_int):
             raise ValueError(
                 "Student and questions must be at least 1\n"
-            )          
-    except ValueError as e:
-        print(f"Invalid data: {e}, please try again.\n")
+            )
+    except ValueError as error:
+        print(f"Invalid data: {error}, please try again.\n")
         return False
 
     return True
@@ -98,14 +106,14 @@ def generate_grade_ponderation_title(data_students_questions, worksheet_title):
     Generates title for grade and ponderation title worksheets.
     will vary depending on quantity of questions as input.
 
-    Parameters: 
+    Parameters:
     data_students_questions list: Take as parameter quantity_data return from
     get_quantity_students_questions_data(). List of 2 strings.
     Worksheet_title: string that depending if used for grade or
     ponderation worksheet will input points or %.
 
     Return:
-    list: List with strings including title for each column for 
+    list: List with strings including title for each column for
     grade and ponderation worksheets.
     """
     quantity_questions = data_students_questions[1]
@@ -137,22 +145,22 @@ def update_grade_ponderation_title(
     grade_worksheet = SHEET.worksheet(worksheet_to_update)
     grade_worksheet.append_row(data_students_questions, table_range=location)
 
-    
-def get_students_name(n):
+
+def get_students_name(number_name):
     """
     Function used to ask the user for the different names of the students.
     Will ask for the exact amount of names as students input from the user.
     Use while until the input is valid as asked.
 
     Parameters:
-    n: int used for loop for asking student name depending on input
+    number_name: int used for loop for asking student name depending on input
     of how many students did the exam.
 
     Returns:
     student_name: list with one string containing student name for n.
     """
     while True:
-        print(f"Please enter the name of the student {n}")
+        print(f"Please enter the name of the student {number_name}")
         print("The name must only contain letters")
         student_name = input("Enter the name:\n")
         if validate_name(student_name):
@@ -166,7 +174,7 @@ def validate_name(name_value):
     Function that validates the name of the students is only alphabetic.
 
     Parameters:
-    name_value: takes as input student_name list with one string containing 
+    name_value: takes as input student_name list with one string containing
     student name for n.
 
     Returns:
@@ -181,9 +189,8 @@ def validate_name(name_value):
             raise ValueError(
                 "The student name must be conformed by letters\n"
             )
-            return False
-    except ValueError as e:
-        print(f"Invalid data: {e}, please try again.\n")
+    except ValueError as error:
+        print(f"Invalid data: {error}, please try again.\n")
         return False
     return True
 
@@ -193,7 +200,7 @@ def update_student_name(name_value):
     Function that adds the name of the students to grade worksheet.
 
     Parameters:
-    name_value: takes as input student_name list with one string containing 
+    name_value: takes as input student_name list with one string containing
     student name for n.
     """
     print("Updating grade and results worksheet...\n")
@@ -201,7 +208,7 @@ def update_student_name(name_value):
     grade_worksheet.append_row(name_value)
     results_worksheet = SHEET.worksheet("results")
     results_worksheet.append_row(name_value)
-    print("Student name updated successfully.\n") 
+    print("Student name updated successfully.\n")
 
 
 def get_questions_score(quantity_questions_exam, name_value):
@@ -213,7 +220,7 @@ def get_questions_score(quantity_questions_exam, name_value):
     Parameters:
     quantity_questions_exam: int that indicates the quantity of questions
     the user input that the exam has.
-    name_value: takes as input student_name list with one string containing 
+    name_value: takes as input student_name list with one string containing
     student name for n.
 
     Return:
@@ -254,24 +261,23 @@ def validate_score(score_values, quantity_questions_exam):
     the user input that the exam has.
 
     Returns:
-    boolean: True if all conditions apply as asked by the function. 
-    False if not. 
-    """  
- 
+    boolean: True if all conditions apply as asked by the function.
+    False if not.
+    """
     try:
         quantity_score_int = [int(x) for x in score_values]
         if len(score_values) != quantity_questions_exam:
             raise ValueError(
                 f"Exactly {quantity_questions_exam} values required, you "
                 f"provided {len(score_values)}\n"
-            ) 
+            )
         elif any(x < 0 or x > 100 for x in quantity_score_int):
             raise ValueError(
                 "Score of each questions must be between 0 and 100\n"
-            )          
+            )
 
-    except ValueError as e:
-        print(f"Invalid data: {e}, please try again.\n")
+    except ValueError as error:
+        print(f"Invalid data: {error}, please try again.\n")
         return False
     return True
 
@@ -349,10 +355,9 @@ def validate_ponderation(ponderation_values, quantity_questions_exam):
     quantity_questions_exam: int that indicates the quantity of questions
     the user input that the exam has.
     Returns:
-    boolean: True if all conditions apply as asked by the function. 
-    False if not. 
+    boolean: True if all conditions apply as asked by the function.
+    False if not.
     """
-           
     try:
         quantity_ponderation_int = [int(x) for x in ponderation_values]
         add_ponderation = sum(quantity_ponderation_int)
@@ -360,18 +365,18 @@ def validate_ponderation(ponderation_values, quantity_questions_exam):
             raise ValueError(
                 f"Exactly {quantity_questions_exam} values required, you provided\
                         {len(ponderation_values)}\n"
-            ) 
+            )
         elif (add_ponderation != 100):
             raise ValueError(
                 "All the % input together must add 100%\n"
-            ) 
+            )
         elif any(x <= 0 or x > 100 for x in quantity_ponderation_int):
             raise ValueError(
                 "Percentage for each questions must be between 0 and 100\n"
             )
 
-    except ValueError as e:
-        print(f"Invalid data: {e}, please try again.\n")
+    except ValueError as error:
+        print(f"Invalid data: {error}, please try again.\n")
         return False
 
     return True
@@ -402,7 +407,7 @@ def get_grade(data_students_questions, ponderation_values, name_value):
     get_quantity_students_questions_data(). List of 2 strings.
     ponderation_values:list with str that contains the ponderation of
     each question the exam has.
-    name_value: takes as input student_name list with one string containing 
+    name_value: takes as input student_name list with one string containing
     student name for n.
 
     Returns
@@ -413,9 +418,8 @@ def get_grade(data_students_questions, ponderation_values, name_value):
     for data, ponderation in zip(data_students_questions, ponderation_values):
         question = data*(ponderation/100)
         points_ponderated_question.append(question)
-    round_list = [round(num) for num in points_ponderated_question]    
+    round_list = [round(num) for num in points_ponderated_question]
     grade_student = sum(x for x in round_list)
-    
     print(f"The final grade for {name_value} is {grade_student} points")
     return grade_student
 
@@ -431,7 +435,7 @@ def get_pass_answer(grade):
     Returns:
     boolean: True if grade is equal or higher than 60 points.
     else false. if True student Pass
-    """ 
+    """
     if (grade >= 60):
         pass_grade = True
     else:
@@ -441,7 +445,7 @@ def get_pass_answer(grade):
 
 
 def update_results_worksheet(
-    grade, pass_result, name_value, n
+    grade, pass_result, name_value, number_name
 ):
     """
     Function that updates the result worksheet for the student n with
@@ -452,16 +456,19 @@ def update_results_worksheet(
     int that correspond to the final grade of the student n.
     pass_result: boolean True if grade is equal or higher than 60 points.
     else false. if True student Pass.
-    name_value: takes as input student_name list with one string containing 
+    name_value: takes as input student_name list with one string containing
     student name for n.
-    n: indicates which students the loop is when this function is called.
-    helps to indicate where to locate the data in the grade worksheet.
+    number_name: indicates which students the loop is when this function
+    is called. Helps to indicate where to locate the data in the grade
+    worksheet.
     """
     print(f"Updating results worksheet with {name_value} results")
     results_worksheet = SHEET.worksheet("results")
-    results_worksheet.append_row(grade, table_range=f'B{n+1}')
+    results_worksheet.append_row(grade, table_range=f'B{number_name+1}')
     results_worksheet = SHEET.worksheet("results")
-    results_worksheet.append_row(pass_result, table_range=f'C{n+1}')
+    results_worksheet.append_row(
+        pass_result, table_range=f'C{number_name+1}'
+    )
     print("Results worksheet updated successfully.\n")
 
 
@@ -469,8 +476,8 @@ def loop_data_input(
     quantity_questions_exam, quantity_of_students, ponderation_values
 ):
     """
-    Loop function that asks the name of the student i, asks for 
-    the points the student i score per question. Updates the grade 
+    Loop function that asks the name of the student i, asks for
+    the points the student i score per question. Updates the grade
     worksheet with the scores. Calculates the final grade for the student i.
     Check if the student i passes or not. Finally updates this information
     to the results worksheet.
@@ -489,7 +496,6 @@ def loop_data_input(
         student_name = []
         student_name.append(get_students_name(i))
         update_student_name(student_name)
-        
         data_score_questions = get_questions_score(
             quantity_questions_exam, student_name
             )
@@ -508,7 +514,7 @@ def loop_data_input(
         update_results_worksheet(
             final_grade, final_pass_answer, student_name, i
             )
-        
+
 
 def main():
     """
@@ -531,7 +537,7 @@ def main():
         "In this hypothetical program the grading works from 0 to 100 points. "
         "0 is the minumum score and 100 is the maximum score. "
         "To pass the student needs to have a score higher or equal to 60 "
-        "points. For example, an exam has 2 questions. A random student gets " 
+        "points. For example, an exam has 2 questions. A random student gets "
         "30 points in the first question and 80 points in the second. "
         "The first question has a weight of 30% of the global grade and "
         "the second question has a weight of 70% of the global grade. "
@@ -551,11 +557,9 @@ def main():
         quantity_data, ponderation_title
         )
     update_grade_ponderation_title(ponderation_update, "ponderation", "A1")
-
     data_pond_questions = get_questions_ponderation(quantity_questions)
     quantity_ponderation = [int(num) for num in data_pond_questions]
     update_questions_ponderation_worksheet(quantity_ponderation)
-   
     loop_data_input(quantity_questions, quantity_students, data_pond_questions)
 
 
