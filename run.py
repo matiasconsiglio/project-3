@@ -161,7 +161,7 @@ def get_students_name(number_name):
     """
     while True:
         print(f"Please enter the name of the student {number_name}")
-        print("The name must only contain letters")
+        print("The name must only contain letters.")
         student_name = input("Enter the name:\n")
         if validate_name(student_name):
             print("The name is valid!")

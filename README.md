@@ -21,45 +21,81 @@ Responsive on all device sizes and has interactive elements.
     - Welcomes the user to the program "Exam Results".
 
 ![Welcome message](/assets/readme-images/welcome_message.png)
-- Home Page
+- Introduction
 
-    - Includes a professional photo of MaTT.
-    - Includes a short phrase about music.
-    - This will guide the user to a first approximation and introduction of what MaTT has to offer as a DJ.
+    - Explains what te program do.
+    - Explains the inputs needed.
+    - Explains the outputs of the program.
+    - Gives an example of what to expect.
+    - Let the user know that all the information is momentary saved in google spreadsheets while the program is running.
 
-![Home](/assets/readme-images/home.png)
-- Bio
+![Introduction](/assets/readme-images/introduction.png)
+- First Input: Number of students and questions from the exam.
 
-    - Includes nationality and residence of MaTT.
-    - Gives a brief description of the journey of MaTT as a DJ.
-    - Gives an explanation of what makes MaTT a special DJ, what kind of playing style he offers and what he is looking forward to attempting inside the music industry.
+    - Ask the user to input the number of students that took the exam.
+    - Ask the user to input the number of questions of the exam.
+    - Explain how the input must be; 2 integers separated by comma.
+    - Gives an example of how the input must me.
+    - Shows the place for the input
 
-![Bio](/assets/readme-images/bio.png)
-- Media
+![First Input: Number of students and questions from the exam](/assets/readme-images/first_input.png)
+- Output from first Input.
 
-    - This section works as an audiovisual portfolio that allows the user to listen and watch different music sets from MaTT.
-    - The media shown in this section also works as a link to the music social-media of MaTT, Soundcloud and Youtube.
-    - Finally the user will actually listen and watch what Matt was expressing with words in the Bio, in case of liking it the user will be able to go to the different social-media or contact him directly in the form from the next section.
+    - For this scenario the input was: 2 students and 2 questions for the exam. 2,2
+    - Output message for valid data.
+    - Let the user know that the data is being updated in the Quantity, Grade and Ponderation worksheets.
+    - Let the user know that the data was succsesfully updated to worksheets.
+    - Program updates quantity worksheet with Number of Students:2 and Number of Questions:2.
+    - Program updates grade worksheet with title for 2 questions: "Question 1 (xpts)" and "Question 2 (xpts)". In this worksheet there is also the title for Student Name because if will will up later with the different students names and scores of each one of them for each question of the exam.
+    - Program updates ponderation worksheet with title for 2 questions: "Question 1 (%pts)" and "Question 2 (%pts)". The ponderation worksheet will not be updated with Student Name since this % per questions are the same for all the students.
 
-![Media Soundcloud](/assets/readme-images/media_1.png)
-![Media Youtube](/assets/readme-images/media_2.png)
-- Contact
+![First Output: Valid data and data saved to worksheets](/assets/readme-images/first_output.png)
+![Quantity worksheet updated](/assets/readme-images/quantity_updated.png)
+![Grade worksheet updated](/assets/readme-images/grade_updated.png)
+![Ponderation worksheet updated](/assets/readme-images/ponderation_updated.png)
+- Second Input: % of ponderation of each question of the exam.
 
-    - This section works as a tool for connecting the user directly with MaTT.
-    - Requires Full Name, Email and Comments/Ideas to be able to push forward the information to MaTT.
-    - An image of a Pioneer XDJ-RX3 is shown at the end of the page as a hint of what MaTT likes/uses to play. Also used to give positive visual feedback for the user.
+    - Ask the user to input the "%" of ponderation of each question of the total grade of the exam.
+    - Ask the user to input the number of "%" depending on how much questions the user initialy input.
+    - Explain how the input must be in this case 2 integers separated by comma. If the user input initialy 3 questions the program will ask the user to input 3 different "%".
+    - Gives an example of how the input must me explaining an hipotetical case.
+    - Shows the place for the input.
+    - For all cases the add of all "%" as input must add 100%, for this case the 2 "%" must add 100%. 
 
-![Contact](/assets/readme-images/contact.png)
-- Footer 
+![Second Input: % of each of the input questions from the exam](/assets/readme-images/second_input.png)
+- Output from Second Input.
 
-    - The Footer includes 3 icons with a direct link to MaTT social-media. Soundcloud, Youtube and Instagram. Links will open in a new tab.
-    - This section works as a tool for connecting the user directly with MaTT through Soundcloud, Youtube or Instagram.
-    - The footer is fixed to the page as the user scrolls, this will help the user in any moment of decision of contact or follow to be there as a direct access.
+    - For this scenario the input was: percentage 1 = 40% and percentage 2 = 60% So: 40,60
+    - Output message for valid data.
+    - Let the user know that the data is being updated in the Ponderation worksheet.
+    - Let the user know that the data was succsesfully updated to worksheets.
+    - Program updates ponderation worksheet with "%" for 2 questions: "40" and "60". The ponderation worksheet will not be updated anymore.
 
-![Footer](/assets/readme-images/footer.png)
+![Second Output: Valid data and data saved to worksheets](/assets/readme-images/second_output.png)
+![Ponderation worksheet updated](/assets/readme-images/ponderation_updated_2.png)
+- Third Input: Name of first student.
+
+    - Ask the user to input the name of the first student.
+    - Ask the user to input the name of the student with just alphabetical characters. 
+    - Shows the place for the input.
+  
+![Third Input: Name of first student](/assets/readme-images/third_input.png)
+- Output from Second Input.
+
+    - For this scenario the input was: percentage 1 = 40% and percentage 2 = 60% So: 40,60
+    - Output message for valid data.
+    - Let the user know that the data is being updated in the Ponderation worksheet.
+    - Let the user know that the data was succsesfully updated to worksheets.
+    - Program updates ponderation worksheet with "%" for 2 questions: "40" and "60". The ponderation worksheet will not be updated anymore.
+
+![Second Output: Valid data and data saved to worksheets](/assets/readme-images/second_output.png)
+![Ponderation worksheet updated](/assets/readme-images/ponderation_updated_2.png)
+
 ## Features Left to Implement
 
 - Allow the user to download the google spreadsheets with all the input and output information.
+- Combine quantity and ponderation worksheets together.
+- Combine grade and results worksheets together.
 
 ## User Experience (UX)
 
@@ -125,7 +161,7 @@ Responsive on all device sizes and has interactive elements.
 
 - The site was deployed to heroku.com using Code Institue's mock terminal for Heroku.
 
-    1.  Each input in the run.py must end with "\n" so the input line for each input appears in heroku.
+    1. Each input in the run.py must end with "\n" so the input line for each input appears in heroku.
 	2. All the dependencies instaled through the Code Institute template and both gspread and google-auth in Github must be instaled in heroku also for the program to work. For this in the terminal "pip3 freeze > requirements.txt" must be typed. Requirement.txt bus be correct spelled because heroku while loading the program will search for the dependencies in this folder to install them and then after allowing the code to run.
 	3. Git add . command plus git commit -m "Add requirements for deployment." and git push comands must be input to the terminal.
 	4. Create account in heroku.com
