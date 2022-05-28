@@ -8,18 +8,19 @@ All the information is added to google spreadsheets. When the program is runned 
 
 [Here is the live version of my project](https://project-3-exam-results.herokuapp.com/)
 
+![Welcome image](/assets/readme-images/first_run.png)
+
 ## Features
 
 ### Existing Features
 
 Responsive on all device sizes and has interactive elements.
 
-- Navigation Bar
+- Welcome Message
 
-    - Includes links to the logo "MaTT", Home page, Bio, Media and Contact. The Navigation Bar is fixed to the top so the user will be able to access it the whole time.
-    - Will allow the user to travel through the different sections of the page without the need of scrolling.
+    - Welcomes the user to the program "Exam Results".
 
-![Navigation Bar](/assets/readme-images/logo_menu.png)
+![Welcome message](/assets/readme-images/welcome_message.png)
 - Home Page
 
     - Includes a professional photo of MaTT.
@@ -58,7 +59,7 @@ Responsive on all device sizes and has interactive elements.
 ![Footer](/assets/readme-images/footer.png)
 ## Features Left to Implement
 
-- Creating a Gallery with images of MaTT.
+- Allow the user to download the google spreadsheets with all the input and output information.
 
 ## User Experience (UX)
 
@@ -88,11 +89,11 @@ Responsive on all device sizes and has interactive elements.
 
 ## Testing
 
-- HTML
+- pep8online.com
 
-    - No errors were returned when passing through the official W3C validator.
+    - No errors were returned when passing through the official pep8online.com validator.
 
-![HTML Validator](/assets/readme-images/html_validator.png)
+![PEP8 Validator](/assets/readme-images/pep8online.png)
 - CSS
 
     - No errors were returned when passing through the official W3C validator.
@@ -107,36 +108,54 @@ Responsive on all device sizes and has interactive elements.
 
 - Web
 
-![Bio](/assets/readme-images/bio.png)
+![Introduction view web](/assets/readme-images/web.png)
 - Ipad Air
 
-![Bio](/assets/readme-images/ipadair.png)
-- Iphone 12 max
+![Introduction view ipad air](/assets/readme-images/ipad_air.png)
+- Iphone 12 pro
 
-![Bio](/assets/readme-images/iphone12pro_bio.png)
-### Unfixed Bugs
+![Introduction view iphone 12 pro](/assets/readme-images/iphone_12_pro.png)
+### Bugs
 
-- YouTube video wont play on smartphone.
-- Form returns "this form is not secure autofill has been turned off" since it action attribute is "mailto" and not an "https//:" secure server.
+- App wont work properly on smartphone.
+- When user input a negative % with a positive % that adds on 100% for the ponderation input the data was shown as valid. Bug fixed, problem in code line 273 "quantity_ponderation_int = [int(x) for x in ponderation_values]". Used "()" instead of "[]", function was created instead of list. Bug fixed with the help of the mentor.
+- No more Bugs.
 
 ## Deployment
 
-- The site was deployed to GitHub pages.
+- The site was deployed to heroku.com using Code Institue's mock terminal for Heroku.
 
-    - In the GitHub repository, navigate to the Settings tab.
-    - From the source section drop-down menu, select the Master Branch.
-    - Once the master branch has been selected, the page will be automatically refreshed with a detailed ribbon display to indicate the successful deployment.
-
-The live link can be found here - https://matiasconsiglio.github.io/Matt/
+    1.  Each input in the run.py must end with "\n" so the input line for each input appears in heroku.
+	2. All the dependencies instaled through the Code Institute template and both gspread and google-auth in Github must be instaled in heroku also for the program to work. For this in the terminal "pip3 freeze > requirements.txt" must be typed. Requirement.txt bus be correct spelled because heroku while loading the program will search for the dependencies in this folder to install them and then after allowing the code to run.
+	3. Git add . command plus git commit -m "Add requirements for deployment." and git push comands must be input to the terminal.
+	4. Create account in heroku.com
+	5. Input name, last name, email address, student role, country in this case Sweden and Python as primary development language. Finally reCAPTCHA and create account.
+	6. Confirm account in email.
+	7. Create password and Login.
+	8. Accepts terms and services.
+	9. Create first app from heroku dashboard.
+	10. Select unique name for the app and region, in this case "Europe".
+	11. App created.
+	12. Go to Settings tab.
+	13. Go to Config Vars.
+	14. Add 2: first one Key = CREDS and value will be all the information inside the file creds.json that includes de private data saved in .gitignore. Second one Key = PORT, value = 8000. This one to improve compatibility with various Python Libraries.
+	15. Add dependencies needed directly fro heroku directly from "Add buildpack".
+	16. First one needed is Python.
+	17. Second one needed is "nodejs", handles the mock terminal code provided.
+	18. Python buildpack must be first in order in the list, second nodejs.
+	19. In github terminal command: heroku login -i
+	20. Command: email and password.
+	21. Command: heroku apps.
+	22. Command: heroku git:remote - project-3-exam-results
+	23. Command: git add . && git commit -m "Deploy to heroku via CLI".
+	24. Command: git push origin main
+    25. Command: git push heroku main
 
 ## Credits
 
-- All code was done by the student with the support of Code Institute classes and his mentor. 
+- All code was done by the student with the support of Code Institute classes, love-sandwiches project and his mentor. 
 
 - All Media content was done and uploaded by the student.
 
-- Music used to make the sets and audio for video from media where bought in different pages like "www.beatport.com" or apple music.
+- Code Institue and heroku for deployment terminal.
 
-- Principal image was taken by Futuro Berg, a professional photographer.
-
-- Pioneer XDJ-RX3 Photo used at the end of the site was obtained from www.pioneerdj.com 

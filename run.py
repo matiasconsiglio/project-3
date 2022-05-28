@@ -19,9 +19,9 @@ def clean_worksheets(worksheet, worksheet_title):
     Generates new titles for worksheets every time
     the program is run.
 
-    Parameteres:
+    Parameters:
     worksheet: str with the name of the worksheet.
-    worksheet_title: str with the tittle for each
+    worksheet_title: str with the title for each
     worksheet.
     """
     clean_worksheet = SHEET.worksheet(worksheet)
@@ -104,7 +104,7 @@ def update_data_quantity_worksheet(data_students_questions):
 def generate_grade_ponderation_title(data_students_questions, worksheet_title):
     """
     Generates title for grade and ponderation title worksheets.
-    will vary depending on quantity of questions as input.
+    will vary depending on the quantity of questions as input.
 
     Parameters:
     data_students_questions list: Take as parameter quantity_data return from
@@ -255,7 +255,7 @@ def get_questions_ponderation(quantity_questions_exam):
 def validate_ponderation(ponderation_values, quantity_questions_exam):
     """
     Function that validates the percentage input by the user for each
-    question is between 0 and 100, only integer. Also will validate
+    question must be between 0 and 100, only integers. Also will validate
     that the quantity of different percentage input is equal to the
     quantity of questions input. Finally will validate that the sum
     of all the porcentage input is exactly 100%. For each student.
@@ -387,7 +387,7 @@ def update_questions_score_worksheet(score_values, n):
     score_values: questions_score return from get_questions_score
     list with str that contain each score from each question from
     exam.
-    n: indicates wich students the loop is when this functions is called.
+    n: indicates which students the loop is when this function is called.
     helps to indicate where to locate the data in the grade worksheet.
     """
     print("Updating grade worksheet...\n")
@@ -476,10 +476,10 @@ def loop_data_input(
     quantity_questions_exam, quantity_of_students, ponderation_values
 ):
     """
-    Loop function that asks the name of the student i, asks for
-    the points the student i score per question. Updates the grade
+    Loop function that asks the name of the student "i", asks for
+    the points the student "i" scores per question. Updates the grade
     worksheet with the scores. Calculates the final grade for the student i.
-    Check if the student i passes or not. Finally updates this information
+    Check if the student "i" passes or not. Finally updates this information
     to the results worksheet.
 
     quantity_questions_exam: int that indicates the quantity of questions
@@ -536,12 +536,12 @@ def main():
         "exam. Second takes as input the percentage each question "
         "ponderates from the global grade. Then the program will ask for the "
         "first student name, later will ask for the score per question for "
-        "that student. The program will continue asking for students names and"
-        " scores until the last student. For each student the program will "
+        "that student. The program will continue asking for student's names "
+        "and scores until the last student. For each student the program will "
         "calculate and show the final grade and if the student passes "
         "the exam.\n"
         "In this hypothetical program the grading works from 0 to 100 points. "
-        "0 is the minumum score and 100 is the maximum score. "
+        "0 is the minimum score and 100 is the maximum score. "
         "To pass the student needs to have a score higher or equal to 60 "
         "points. For example, an exam has 2 questions. A random student gets "
         "30 points in the first question and 80 points in the second. "
