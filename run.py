@@ -211,6 +211,102 @@ def update_student_name(name_value):
     print("Student name updated successfully.\n")
 
 
+def get_questions_ponderation(quantity_questions_exam):
+    """
+    Function used to ask the user for the different ponderation of each of
+    the input questions, for each student.
+    Will ask for ponderation numbers between 0 and 100 % for each question.
+    Each % input per question added together should be exactly 100%.
+
+    Parameters:
+    quantity_questions_exam: int that indicates the quantity of questions
+    the user input that the exam has.
+
+    Return:
+    questions_ponderation: list with str that contains the ponderation of
+    each question the exam has.
+    """
+    while True:
+        print(
+            "Please enter the % of ponderation for each of the "
+            f"{quantity_questions_exam} question(s) of the exam"
+            )
+        print(
+            f"You must input {quantity_questions_exam} integer numbers "
+            "separated with commas and each number should be between "
+            "0 and 100.\n"
+            "For example an exam has two questions, first has a value "
+            "of 40% and second 60%, both % add in total 100% of the grade "
+            "of the exam."
+            )
+        questions_ponderation_str = input(
+            "Enter the numbers that represent each % here:\n"
+            )
+        questions_ponderation = questions_ponderation_str.split(",")
+
+        if validate_ponderation(
+            questions_ponderation, quantity_questions_exam
+        ):
+            print("Percentage for each question is valid!")
+            break
+    return questions_ponderation
+
+
+def validate_ponderation(ponderation_values, quantity_questions_exam):
+    """
+    Function that validates the percentage input by the user for each
+    question is between 0 and 100, only integer. Also will validate
+    that the quantity of different percentage input is equal to the
+    quantity of questions input. Finally will validate that the sum
+    of all the porcentage input is exactly 100%. For each student.
+
+    Parameters:
+    ponderation_values:list with str that contains the ponderation of
+    each question the exam has.
+    quantity_questions_exam: int that indicates the quantity of questions
+    the user input that the exam has.
+    Returns:
+    boolean: True if all conditions apply as asked by the function.
+    False if not.
+    """
+    try:
+        quantity_ponderation_int = [int(x) for x in ponderation_values]
+        add_ponderation = sum(quantity_ponderation_int)
+        if len(ponderation_values) != quantity_questions_exam:
+            raise ValueError(
+                f"Exactly {quantity_questions_exam} values required, you provided\
+                        {len(ponderation_values)}\n"
+            )
+        elif add_ponderation != 100:
+            raise ValueError(
+                "All the % input together must add 100%\n"
+            )
+        elif any(x <= 0 or x > 100 for x in quantity_ponderation_int):
+            raise ValueError(
+                "Percentage for each questions must be between 0 and 100\n"
+            )
+
+    except ValueError as error:
+        print(f"Invalid data: {error}, please try again.\n")
+        return False
+
+    return True
+
+
+def update_questions_ponderation_worksheet(ponderation_values):
+    """
+    Function that add the % of each question for each one of the students
+    to the ponderation worksheet.
+    Parameters:
+    ponderation_values:list with str that contains the ponderation of
+    each question the exam has.
+    """
+    print("Updating ponderation worksheet...\n")
+    pond_worksheet = SHEET.worksheet("ponderation")
+    pond_worksheet.append_row(ponderation_values)
+    print("Ponderation worksheet updated successfully.\n")
+
+
 def get_questions_score(quantity_questions_exam, name_value):
     """
     Function used to ask the user for the different scores of each of
@@ -298,102 +394,6 @@ def update_questions_score_worksheet(score_values, n):
     score_worksheet = SHEET.worksheet("grade")
     score_worksheet.append_row(score_values, table_range=f'B{n+1}')
     print("Grade worksheet updated successfully.\n")
-
-
-def get_questions_ponderation(quantity_questions_exam):
-    """
-    Function used to ask the user for the different ponderation of each of
-    the input questions, for each student.
-    Will ask for ponderation numbers between 0 and 100 % for each question.
-    Each % input per question added together should be exactly 100%.
-
-    Parameters:
-    quantity_questions_exam: int that indicates the quantity of questions
-    the user input that the exam has.
-
-    Return:
-    questions_ponderation: list with str that contains the ponderation of
-    each question the exam has.
-    """
-    while True:
-        print(
-            "Please enter the % of ponderation for each of the "
-            f"{quantity_questions_exam} question(s) of the exam"
-            )
-        print(
-            f"You must input {quantity_questions_exam} integer numbers "
-            "separated with commas and each number should be between "
-            "0 and 100.\n"
-            "For example an exam has two questions, first has a value "
-            "of 40% and second 60%, both % add in total 100% of the grade "
-            "of the exam."
-            )
-        questions_ponderation_str = input(
-            "Enter the numbers that represent each % here:\n"
-            )
-        questions_ponderation = questions_ponderation_str.split(",")
-
-        if validate_ponderation(
-            questions_ponderation, quantity_questions_exam
-        ):
-            print("Percentage for each question is valid!")
-            break
-    return questions_ponderation
-
-
-def validate_ponderation(ponderation_values, quantity_questions_exam):
-    """
-    Function that validates the percentage input by the user for each
-    question is between 0 and 100, only integer. Also will validate
-    that the quantity of different percentage input is equal to the
-    quantity of questions input. Finally will validate that the sum
-    of all the porcentage input is exactly 100%. For each student.
-
-    Parameters:
-    ponderation_values:list with str that contains the ponderation of
-    each question the exam has.
-    quantity_questions_exam: int that indicates the quantity of questions
-    the user input that the exam has.
-    Returns:
-    boolean: True if all conditions apply as asked by the function.
-    False if not.
-    """
-    try:
-        quantity_ponderation_int = [int(x) for x in ponderation_values]
-        add_ponderation = sum(quantity_ponderation_int)
-        if len(ponderation_values) != quantity_questions_exam:
-            raise ValueError(
-                f"Exactly {quantity_questions_exam} values required, you provided\
-                        {len(ponderation_values)}\n"
-            )
-        elif (add_ponderation != 100):
-            raise ValueError(
-                "All the % input together must add 100%\n"
-            )
-        elif any(x <= 0 or x > 100 for x in quantity_ponderation_int):
-            raise ValueError(
-                "Percentage for each questions must be between 0 and 100\n"
-            )
-
-    except ValueError as error:
-        print(f"Invalid data: {error}, please try again.\n")
-        return False
-
-    return True
-
-
-def update_questions_ponderation_worksheet(ponderation_values):
-    """
-    Function that add the % of each question for each one of the students
-    to the ponderation worksheet.
-    Parameters:
-    ponderation_values:list with str that contains the ponderation of
-    each question the exam has.
-    """
-    print("Updating ponderation worksheet...\n")
-    pond_worksheet = SHEET.worksheet("ponderation")
-    pond_worksheet.append_row(ponderation_values)
-    print("Ponderation worksheet updated successfully.\n")
 
 
 def get_grade(data_students_questions, ponderation_values, name_value):
