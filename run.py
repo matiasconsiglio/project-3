@@ -161,7 +161,7 @@ def get_students_name(number_name):
     """
     while True:
         print(f"Please enter the name of the student {number_name}")
-        print("The name must only contain letters.")
+        print("The name must contain letters. Also space is allowed.")
         student_name = input("Enter the name:\n")
         if validate_name(student_name):
             print("The name is valid!")
@@ -172,17 +172,19 @@ def get_students_name(number_name):
 def validate_name(name_value):
     """
     Function that validates the name of the students is only alphabetic.
+    Also allow to have 'space' in case the input is first name and last
+    name.
 
     Parameters:
     name_value: takes as input student_name list with one string containing
-    student name for n.
+    the student name.
 
     Returns:
     boolean: True if student_name only contains alphabetic characters. False
     if not.
     """
     try:
-        if name_value.isalpha():
+        if all(x.isalpha or x.isspace for x in name_value):
             return True
 
         else:
