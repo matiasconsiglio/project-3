@@ -93,7 +93,7 @@ def update_data_quantity_worksheet(data_students_questions):
 
     Parameters:
     data_students_questions list: Take as parameter quantity_data return from
-    get_quantity_students_questions_data(). List of 2 strings.
+    get_quantity_students_questions_data(). List of 2 strings converted after in ma.
     """
     print("Updating Quantity, Grade and Ponderation worksheets...\n")
     quantity_worksheet = SHEET.worksheet("quantity")
@@ -144,73 +144,6 @@ def update_grade_ponderation_title(
     """
     grade_worksheet = SHEET.worksheet(worksheet_to_update)
     grade_worksheet.append_row(data_students_questions, table_range=location)
-
-
-def get_students_name(number_name):
-    """
-    Function used to ask the user for the different names of the students.
-    Will ask for the exact amount of names as students input from the user.
-    Use while until the input is valid as asked.
-
-    Parameters:
-    number_name: int used for loop for asking student name depending on input
-    of how many students did the exam.
-
-    Returns:
-    student_name: list with one string containing student name for n.
-    """
-    while True:
-        print(f"Please enter the name of the student {number_name}.")
-        print("The name must contain letters. Also space is allowed.")
-        student_name = input("Enter the name:\n")
-        if validate_name(student_name):
-            print("The name is valid!")
-            break
-    return student_name
-
-
-def validate_name(name_value):
-    """
-    Function that validates the name of the students is only alphabetic.
-    Also allow to have 'space' in case the input is first name and last
-    name.
-
-    Parameters:
-    name_value: takes as input student_name list with one string containing
-    the student name.
-
-    Returns:
-    boolean: True if student_name only contains alphabetic characters. False
-    if not.
-    """
-    try:
-        if all(x.isalpha() or x.isspace() for x in name_value):
-            return True
-        else:
-            raise ValueError(
-                "The student name must be conformed by letters. "
-                "Can contain space.\n"
-            )
-    except ValueError as error:
-        print(f"Invalid data: {error}, please try again.\n")
-        return False
-    return True
-
-
-def update_student_name(name_value):
-    """
-    Function that adds the name of the students to grade worksheet.
-
-    Parameters:
-    name_value: takes as input student_name list with one string containing
-    student name for n.
-    """
-    print("Updating grade and results worksheet...\n")
-    grade_worksheet = SHEET.worksheet("grade")
-    grade_worksheet.append_row(name_value)
-    results_worksheet = SHEET.worksheet("results")
-    results_worksheet.append_row(name_value)
-    print("Student name updated successfully.\n")
 
 
 def get_questions_ponderation(quantity_questions_exam):
@@ -307,6 +240,73 @@ def update_questions_ponderation_worksheet(ponderation_values):
     pond_worksheet = SHEET.worksheet("ponderation")
     pond_worksheet.append_row(ponderation_values)
     print("Ponderation worksheet updated successfully.\n")
+
+
+def get_students_name(number_name):
+    """
+    Function used to ask the user for the different names of the students.
+    Will ask for the exact amount of names as students input from the user.
+    Use while until the input is valid as asked.
+
+    Parameters:
+    number_name: int used for loop for asking student name depending on input
+    of how many students did the exam.
+
+    Returns:
+    student_name: list with one string containing student name for n.
+    """
+    while True:
+        print(f"Please enter the name of the student {number_name}.")
+        print("The name must contain letters. Also space is allowed.")
+        student_name = input("Enter the name:\n")
+        if validate_name(student_name):
+            print("The name is valid!")
+            break
+    return student_name
+
+
+def validate_name(name_value):
+    """
+    Function that validates the name of the students is only alphabetic.
+    Also allow to have 'space' in case the input is first name and last
+    name.
+
+    Parameters:
+    name_value: takes as input student_name list with one string containing
+    the student name.
+
+    Returns:
+    boolean: True if student_name only contains alphabetic characters. False
+    if not.
+    """
+    try:
+        if all(x.isalpha() or x.isspace() for x in name_value):
+            return True
+        else:
+            raise ValueError(
+                "The student name must be conformed by letters. "
+                "Can contain space.\n"
+            )
+    except ValueError as error:
+        print(f"Invalid data: {error}, please try again.\n")
+        return False
+    return True
+
+
+def update_student_name(name_value):
+    """
+    Function that adds the name of the students to grade worksheet.
+
+    Parameters:
+    name_value: takes as input student_name list with one string containing
+    student name for n.
+    """
+    print("Updating grade and results worksheet...\n")
+    grade_worksheet = SHEET.worksheet("grade")
+    grade_worksheet.append_row(name_value)
+    results_worksheet = SHEET.worksheet("results")
+    results_worksheet.append_row(name_value)
+    print("Student name updated successfully.\n")
 
 
 def get_questions_score(quantity_questions_exam, name_value):
